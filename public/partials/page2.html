@@ -1,1 +1,30 @@
 <P> You have reached page2</P>
+
+<div>
+    <h1>Dropdown list test with angular</h1>
+
+    <div class="container">
+        <div class="dropdown">
+            <button type="button" id="DropdownMenu1" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                DropDown<span class="caret"></span></button>
+
+
+            <ul role="menu" aria-labelledby="dropdownMenu1" class="dropdown-menu">
+                <li ng-repeat="item in items" role="presentation">
+                    <a role="menuitem" tabindex="-1" href="{{item.target}}">{{item.label}}</a>
+                </li>
+            </ul>
+        </div>
+        <form id="addForm" action=" " role="form" ng-submit="add_item(item)" class="form-inline">
+            <div class="input-group">
+                <div class="input-group-addon">url</div>
+                <input id="target" type="text" ng-model="item.target" class="form-control">
+            </div>
+            <div class="input-group">
+                <div class="input-group-addon">Label</div>
+                <input id="label" type="text" ng-model="item.label" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-default">Send</button>
+        </form>
+    </div>
+</div>
