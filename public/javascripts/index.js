@@ -25,10 +25,12 @@ angular.module('myNgSite', ['ngRoute',
                 userName: userName,
                 password: password
             }).then(function (result) {
+                accessToken = result.data.token;
                 userInfo = {
-                    accessToken: result.data.token,
-                    user: result.data.user
+                    user: result.data.user,
+                    role: result.data.role
                 };
+                $window.sessionStorage["accessToken"] = accessToken;
                 $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
                 deferred.resolve(userInfo);
             }, function (error) {
@@ -41,12 +43,14 @@ angular.module('myNgSite', ['ngRoute',
         function logout() {
             userInfo = null;
             $window.sessionStorage["userInfo"] = null;
+            $window.sessionStorage["accessToken"] = null;
 
         }
 
         function init() {
             if ($window.sessionStorage["userInfo"]) {
                 userInfo = JSON.parse($window.sessionStorage["userInfo"]);
+
             }
         }
 
@@ -66,7 +70,7 @@ angular.module('myNgSite', ['ngRoute',
                 config.headers = config.headers || {};
                 if ($window.sessionStorage.getItem('accessToken')) {
                     config.headers.Authorization = 'Bearer ' + $window.sessionStorage.getItem('accessToken');
-                    console.log('token sent');
+
                 }
                 return config || $q.when(config);
             },
@@ -80,7 +84,7 @@ angular.module('myNgSite', ['ngRoute',
     })
 
     .config(function ($httpProvider) {
-        console.log('configuration interceptor');
+
         $httpProvider.interceptors.push('AuthInterceptor');
     })
 
@@ -124,14 +128,7 @@ angular.module('myNgSite', ['ngRoute',
                 $location.path("/login");
             }
         });
-    }])
-    .run(['$window', '$rootScope', '$injector', function ($window, $rootScope, $injector) {
-        $injector.get("$http").defaults.transformRequest = function (data, headersGetter) {
-            if ($window.sessionStorage.getItem('accessToken')) headersGetter()['Authorization'] = "Bearer " + $window.sessionStorage.getItem('accessToken');
-            if (data) {
-                return angular.toJson(data);
-            }
-        };
     }]);
+
 
 

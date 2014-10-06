@@ -11,7 +11,7 @@ var jwt = require('jwt-simple');
 router.post('/login', function (req, res) {
     var creds = req.body;
 
-    if (creds.userName === "vincent" & creds.password === "patchol") {
+    if (creds.userName === "vincent" && creds.password === "patchol") {
 
 
         var user = {
@@ -23,6 +23,7 @@ router.post('/login', function (req, res) {
         var expires = moment().add(7, 'days').valueOf();
         var token = jwt.encode({
             iss: user.id,
+            name: 'vincent',
             exp: expires
         }, req.app.get('jwtTokenSecret'));
 
