@@ -1,7 +1,8 @@
 angular.module('myNgSite', ['ngRoute',
     'myNgSite.page2',
     'myNgSite.main',
-    'myNgSite.login'])
+    'myNgSite.login',
+    'myNgSite.users'])
 
     .config(['$routeProvider', function ($routeProvider, $locationProvider) {
         $routeProvider

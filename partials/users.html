@@ -1,0 +1,19 @@
+<div class="container">
+
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        <tr ng-repeat="user in users track by user._id">
+            <td>{{user.name}}</td>
+            <td>{{user.role}}</td>
+            <td>
+                <a href="#"><span class='glyphicon glyphicon-remove-circle'/></a>
+                <a href="#" style="color:#d9534f;"><span class='glyphicon glyphicon-remove-circle'></span></a>
+            </td>
+        </tr>
+    </table>
+
+</div>

@@ -12,7 +12,8 @@ angular.module('myNgSite.login', ['ngRoute', 'myNgSite'])
                 .then(function (th) {
                     $location.path("main");
                 }, function (error) {
-                    console.log('error:' + error);
+                    console.log('error:');
+                    console.dir(error);
                 }, function () {
                     console.log('progress');
                 });

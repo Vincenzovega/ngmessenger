@@ -30,26 +30,16 @@
                 <li ng-class="navClass('main')"><a href="#/main">Home</a></li>
                 <li ng-class="navClass('page2')"><a href="#/page2">page2</a></li>
                 <li ng-class="navClass('page3')"><a href="#/page3">Contact</a></li>
-                <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#/page2">Page2</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-hide="logged"><a href="#/login">Login</a></li>
+                <li ng-hide="logged" ng-class="navClass('login')"><a href="#/login">Login</a></li>
                 <li class="dropdown" ng-show="logged">
                     <a class="dropdown-toggle" href="" data-toggle="dropdown"><span ng-bind="user.name"></span> <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu" role=menu">
                         <li><a href="#/dashboard">View user info</a></li>
+                        <li><a href="#/users">Administrate users</a></li>
+
                         <li class="dropdown-header">Nav header</li>
                         <li><a href="" ng-click="logout()">Logout</a></li>
                     </ul>
@@ -79,6 +69,7 @@
 <script src="/javascripts/page2.js"></script>
 <script src="/javascripts/main.js"></script>
 <script src="/javascripts/login.js"></script>
+<script src="/javascripts/users.js"></script>
 
 </body>
 </html>
