@@ -44,7 +44,18 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/login">Login</a></li>
+                <li ng-hide="logged"><a href="#/login">Login</a></li>
+                <li class="dropdown" ng-show="logged">
+                    <a class="dropdown-toggle" href="" data-toggle="dropdown"><span ng-bind="user.name"></span> <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" role=menu">
+                        <li><a href="#/dashboard">View user info</a></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="" ng-click="logout()">Logout</a></li>
+                    </ul>
+
+
+                </li>
 
             </ul>
         </div>

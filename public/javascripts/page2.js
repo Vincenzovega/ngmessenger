@@ -28,7 +28,19 @@ angular.module('myNgSite.page2', ['ngRoute'])
         $routeProvider
             .when('/page2', {
                 templateUrl: '/partials/page2.html',
-                controller: 'page2Ctrl'
+                controller: 'page2Ctrl',
+                resolve: {
+                    auth: ["$q", "authenticationSvc", function ($q, authenticationSvc) {
+                        var userInfo = authenticationSvc.getUserInfo();
+
+                        if (userInfo) {
+                            return $q.when(userInfo);
+                        } else {
+                            return $q.reject({ authenticated: false });
+                        }
+                    }]
+                }
+
 
             });
     }]);
