@@ -11,3 +11,9 @@ a {
 .navbar-static-top {
     margin-bottom: 19px;
 }
+
+
+
+.form-inline>td>.form-group{
+    display: inline-block;
+}

@@ -1,7 +1,7 @@
 /**
  * Created by vincentleyne on 03/10/2014.
  */
-angular.module('myNgSite.main', ['ngRoute', 'myNgSite'])
+angular.module('myNgSite.main', ['ngRoute', 'myNgSite','ui.bootstrap'])
     .controller('mainCtrl', ['$scope', function ($scope) {
         console.log('mainCtrl opened');
 
