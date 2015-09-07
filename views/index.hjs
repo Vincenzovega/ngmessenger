@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
     <title>{{ title }}</title>
     <meta charset="utf-8">
@@ -23,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">{{ title }}</a>
         </div>
         <div class="navbar-collapse collapse" ng-controller="navCtrl">
             <ul class="nav navbar-nav">
@@ -33,10 +32,11 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="logged" ng-class="navClass('login')"><a href="#/login">Login</a></li>
-                <li class="dropdown" ng-show="logged">
-                    <a class="dropdown-toggle" href="" data-toggle="dropdown"><span ng-bind="user.name"></span> <span
+                <li ng-show="logged" class="dropdown">
+                    <a class="dropdown-toggle" href="" data-toggle="dropdown"><span
+                            class="glyphicon glyphicon-user"/><span ng-bind="user.name"></span><span
                             class="caret"></span></a>
-                    <ul class="dropdown-menu" role=menu">
+                    <ul class="dropdown-menu" role="menu">
                         <li><a href="#/dashboard">View user info</a></li>
                         <li><a href="#/users">Administrate users</a></li>
 
@@ -54,22 +54,22 @@
 </div>
 
 
-<h1>{{ title }}</h1>
-
-<p>Welcome to {{ title }}</p>
-
 <div ng-view></div>
 <script src="/jquery/dist/jquery.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.js"></script>
 
 <script src="/angular/angular.js"></script>
 <script src="/angular-route/angular-route.js"></script>
+<script src="/angular-ui-bootstrap-bower/ui-bootstrap.js"></script>
+<script src="/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+<script src="/angular-animate/angular-animate.js"></script>
 
 <script src="/javascripts/index.js"></script>
 <script src="/javascripts/page2.js"></script>
 <script src="/javascripts/main.js"></script>
 <script src="/javascripts/login.js"></script>
 <script src="/javascripts/users.js"></script>
+
 
 </body>
 </html>

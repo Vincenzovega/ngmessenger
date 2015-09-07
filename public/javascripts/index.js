@@ -1,4 +1,6 @@
 angular.module('myNgSite', ['ngRoute',
+    'ui.bootstrap',
+    'ngAnimate',
     'myNgSite.page2',
     'myNgSite.main',
     'myNgSite.login',

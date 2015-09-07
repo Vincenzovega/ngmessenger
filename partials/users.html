@@ -1,19 +1,53 @@
-<div class="container">
+<div class="container-fluid">
 
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Actions</th>
-        </tr>
-        <tr ng-repeat="user in users track by user._id">
-            <td>{{user.name}}</td>
-            <td>{{user.role}}</td>
-            <td>
-                <a href="#"><span class='glyphicon glyphicon-remove-circle'/></a>
-                <a href="#" style="color:#d9534f;"><span class='glyphicon glyphicon-remove-circle'></span></a>
-            </td>
-        </tr>
-    </table>
+            <div class="page-header"><h3>Users administration</h3></div>
 
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="user in users track by user._id">
+                            <td>{{user.name}}</td>
+                            <td>{{user.role}}</td>
+                            <td>
+                                <a href="#"><span class='glyphicon glyphicon-remove-circle'/></a>
+                                <a href="#" style="color:#d9534f;"><span
+                                        class='glyphicon glyphicon-remove-circle'></span></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div> </div>
+
+            <div class="panel panel-primary">
+            <div class="panel-heading">Add a new user</div>
+                <div class="panel-body"><form class="form" role="form" action="">
+                    <label for="nameInput">Username</label>
+                    <input class="form-control" id="nameinput" type="text"/>
+
+                    <label for "passwordInput">password</label>
+                    <input class="form-control" id="passwordInput" type="password"/>
+
+                    <label for="roleSelector">Role</label>
+                    <div id="roleSelector" class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active">
+                            <input class="btn btn-default" type="radio" name="options" id="guest" checked> Guest
+                        </label>
+                        <label class="btn btn-primary">
+                            <input class="btn btn-default" type="radio" name="options" id="modo"> Moderator
+                        </label>
+                        <label class="btn btn-primary">
+                            <input class="btn btn-default" type="radio" name="options" id="admin"> Administrator
+                        </label>
+                    </div>
+
+                </form></div>
+            </div>
+        </div>
+    </row>
 </div>
