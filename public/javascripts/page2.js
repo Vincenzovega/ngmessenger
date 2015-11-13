@@ -52,6 +52,11 @@ angular.module('myNgSite.page2', ['ngRoute'])
             $scope.item.time = null;
         };
 
+        $scope.rowClass = function (row){
+            if (row.comlete) return "success";
+
+        };
+
 
         $scope.updateList = function () {
             $http({method: "GET", url: '/api/callList'}).success(function (data, status, headers, config) {
@@ -75,15 +80,17 @@ angular.module('myNgSite.page2', ['ngRoute'])
             }).error(function (data, status, headers, config) {
                 console.log('error', data);
 
-            })
+            });
         };
 
-        $scope.delete_item = function (item) {
-
-            $http.post('/api/delItem', item).success(function (data, status, header, config) {
-                $scope.items.splice($scope.items.indexOf(item), 1);
-
-            })
+        $scope.complete_item = function (item) {
+            console.log('complete_item function called');
+            item.complete = true;
+            $http.post('/api/updateItem', {'_id':item._id,'complete':item.complete}).success(function (data, status, header, config) {
+                console.log('complete_item success');
+            }).error(function(data,status,headers,config){
+                console.log('error',data);
+            });
         };
 
 

@@ -18,7 +18,8 @@ var callsSchema = new Schema({
     caller: String,
     date: String,
     time: String,
-    case: String
+    case: String,
+    complete: Boolean
 });
 
 mongoose.model('users', usersSchema);
@@ -92,6 +93,19 @@ router.post('/addItem', function (req, res) {
         console.log("created new id: " + savedItem._id);
         res.json(savedItem);
     })
+});
+
+router.post('/updateItem', function(req,res){
+    console.log('updateItem called');
+    call.findOne({'_id':req.body._id},function(err,doc){
+        if (err) console.log('err.err');
+        Object.keys(req.body).forEach(function(key){
+            console.log(key + " in request equals " + req.body[key]);
+            doc[key] = req.body[key];
+            doc.save();
+            res.status(200).end('success');
+        });
+    });
 });
 
 router.post('/delItem', function (req, res) {

@@ -1,77 +1,111 @@
 <P> You have reached page2</P>
 
-<div>
-    <h1>List of calls</h1>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Voicemail history</div>
 
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading">Panel heading</div>
+        <div class="panel-body">
+
+            <form id="addForm" action=" " role="form" ng-submit="add_item(newRecord)">
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <label for="caller">Caller phone number</label>
+                        <input id="caller" type="text" ng-model="newRecord.caller" class="form-control"
+                               ng-required="true">
+                        <span class="help-block">.</span>
+                    </div>
+
+                    <div class="col-md-2">
+                        <label for="time">Time of call</label>
+                        <timepicker id="time" ng-model="newRecord.time" ng-change="changed()"
+                                    show-spinners=false
+                                    show-meridian="true"
+                                    arrowkeys=true
+                                    ng-required="true">
+
+                        </timepicker>
+                        <span class="help-block">.</span>
+                    </div>
 
 
-            <div class="panel-body">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Caller</th>
-                        <th>Date of call</th>
-                        <th>Time of call</th>
-                        <th>Case number</th>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
+                    <div class="col-md-3">
+                        <label for="day">Day of call</label>
 
-                    <tr>
-                        <form id="addForm" action=" " role="form" ng-submit="add_item(newRecord)" class="form-inline">
-                            <div class="input-sm">
-                                <td class="vert-align">
-                                    <input id="caller" type="text" ng-model="newRecord.caller"
-                                           class="form-control" ng-required="true"></td>
-                                <td width="35%" class="vert-align">
-                                    <div class="input-group"><input type="text" class="form-control"
-                                                                    datepicker-popup="{{format}}"
-                                                                    ng-model="newRecord.date" is-open="opened"
-                                                                    datepicker-options="dateOptions"
-                                                                    ng-required="true" close-text="Close"/><span
-                                            class="input-group-btn"><button type="button" class="btn btn-default"
-                                                                            ng-click="open($event)"><i
-                                            class="glyphicon glyphicon-calendar"></i></button></span></div>
-                                </td>
-                                <td class="vert-align">
-                                    <timepicker ng-model="newRecord.time" ng-change="changed()"
-                                                show-meridian="ismeridian" arrowkeys="false"
-                                                ng-required="true"></timepicker>
-                                </td>
-                                <td class="vert-align"><input id="label" type="text" ng-model="newRecord.case"
-                                                              class="form-control" ng-required="true"></td>
-                                <td class="vert-align">
-                                    <button type="submit" class="btn btn-default">Add</button>
-                                </td>
-                            </div>
-                        </form>
+                        <div class="input-group"><input id="day" type="text" class="form-control"
+                                                        datepicker-popup="{{format}}"
+                                                        ng-model="newRecord.date" is-open="opened"
+                                                        datepicker-options="dateOptions"
+                                                        ng-required="true" close-text="Close"/>
+                            <span class="input-group-btn"><button type="button" class="btn btn-default"
+                                                                  ng-click="open($event)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button></span>
+                        </div>
+                        <span class="help-block"></span>
+                    </div>
 
-                    </tr>
-                    <tr class="animate" ng-repeat="record in items | filter:search" role="presentation">
-                        <td>{{record.caller}}</td>
-                        <td>{{record.date | date:'shortDate'}}</td>
-                        <td>{{record.time | date:'shortTime'}}</td>
-                        <td>{{record.case}}</td>
-                        <td>
-                            <button type="button" class="btn btn-danger" ng-click="delete_item(record)">Delete</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <thead>
-                    <tr>
-                        <td>
-                        </td>
-                    </tr>
-                    </thead>
-            </div>
 
-            </table>
+                    <div class="col-md-3"><label for="case">Case number</label>
+                        <input id="case" type="text" ng-model="newRecord.case"
+                               class="form-control" ng-required="true"></div>
+                    <span class="help-block"></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea class="form-control" ng-model="newRecord.comment" name="comments" id="comments"
+                                  cols="20" rows="5"></textarea>
+                        <span class="help-block"></span>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-default">Add</button>
+                    </div>
+                </div>
+            </form>
         </div>
+        <table class="table table-hover">
+
+            <tr>
+                <th>Caller</th>
+                <th>Date of call</th>
+                <th>Time of call</th>
+                <th>Case number</th>
+                <th>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="" aria-haspopup="true" aria-expanded="false">
+                            Dropdown <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="">Show completed</a></li>
+                            <li><a href="">option 2</a></li>
+                            <li><a href="">Option 3</a></li>
+                        </ul>
+                    </div>
+
+                </th>
+                <td></td>
+            </tr>
 
 
+            <tr class="animate ng-class:{'success':record.complete}"
+                ng-repeat="record in items | orderBy:['date','time']" role="presentation">
+                <td>{{record.caller}}</td>
+                <td>{{record.date | date:'shortDate'}}</td>
+                <td>{{record.time | date:'shortTime'}}</td>
+                <td>{{record.case}}</td>
+                <td>
+                    <button ng-hide = "record.complete" type="button" class="btn btn-success" ng-click="complete_item(record)">Complete</button>
+                    <button ng-show = "record.complete" type="button" class="btn btn-danger" ng-click="complete_item(record)">Complete</button>
+
+                </td>
+            </tr>
+
+
+        </table>
     </div>
+
+
+</div>
 </div>
