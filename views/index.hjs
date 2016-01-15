@@ -28,6 +28,7 @@
             <ul class="nav navbar-nav">
                 <li ng-class="navClass('main')"><a href="#/main">Home</a></li>
                 <li ng-class="navClass('page2')"><a href="#/page2">page2</a></li>
+                <li ng-class="navClass('arduino')"><a href="#/arduino">Arduino</a></li>
                 <li ng-class="navClass('page3')"><a href="#/page3">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -63,11 +64,13 @@
 <script src="/angular-ui-bootstrap-bower/ui-bootstrap.js"></script>
 <script src="/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
 <script src="/angular-animate/angular-animate.js"></script>
+<script src="/raphael/raphael.js"></script>
 
 <script src="/javascripts/index.js"></script>
 <script src="/javascripts/page2.js"></script>
 <script src="/javascripts/main.js"></script>
 <script src="/javascripts/login.js"></script>
+<script src="/javascripts/arduino.js"></script>
 <script src="/javascripts/users.js"></script>
 
 

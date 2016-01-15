@@ -1,9 +1,110 @@
 #!/usr/bin/env node
 var debug = require('debug')('ngmessenger');
+var serialPort = require('serialport');
 var app = require('../app');
 
+var Port;
+
+
 app.set('port', process.env.PORT || 3000);
+
 
 var server = app.listen(app.get('port'), function () {
     debug('Express server listening on port ' + server.address().port);
 });
+var io = require('socket.io')(server);
+
+
+arduinoPort();
+
+
+io.on('connection', function (socket) {
+    console.log('a browser is connected');
+
+
+    socket.on('arduino', function (message) {
+        console.log("command for arduino received: " + message);
+        Port.write(message + '\n', function (err, results) {
+            if (err) {
+                Port.open();
+
+            }
+        });
+    });
+
+    io.on('disconnect', function (socket) {
+        console.log('user disconnected');
+    });
+
+});
+
+
+function arduinoPort() {
+    //var Port;
+    serialPort.list(function (err, ports) {
+        ports.forEach(function (port) {
+            console.log(port.manufacturer);
+
+            if (port.manufacturer === "Arduino LLC") {
+                console.log("Found arduino");
+                Port = new serialPort.SerialPort(port.comName,
+                    {
+                        baudrate: 9600,
+                        parser: serialPort.parsers.readline("\n")
+                    }, false);
+            }
+        });
+
+        if (typeof Port === 'undefined') {
+            console.log("Couldn't find Arduino");
+        } else {
+            Port.open(function (error) {
+                if (error) {
+                    console.log("error opening port" + error);
+                } else {
+                    console.log("connect to Arduino OK");
+
+
+                    Port.on("open", function () {
+                        console.log("Connection a port serie ouvert");
+                    });
+
+
+                }
+
+            });
+            Port.on("open", function () {
+                console.log("Event:Serial connection opened");
+
+                Port.on("data", function (data) {
+                    console.log(data);
+                    //io.emit('arduino',JSON.parse(data));
+                });
+
+                Port.on("close", function () {
+                    console.log("Event: Connection au port serie fermé");
+                    var interval = setInterval(function () {
+                        Port.open(function (err) {
+                            if (err) console.log("Try to reconnect. "); else clearInterval(interval);
+                        });
+                    }, 100);
+                });
+
+
+            });
+
+            Port.on("error", function (err) {
+                console.log("Error: ", err);
+            });
+        }
+
+
+    });
+
+
+}
+
+var serialMon = setInterval(function () {
+    //console.log(Port);
+
+}, 1000);

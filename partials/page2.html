@@ -1,111 +1,100 @@
-<P> You have reached page2</P>
 
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">Voicemail history</div>
+    < class="panel panel-default">
+    <div class="panel-heading">Voicemail history</div>
 
-        <div class="panel-body">
+    <div class="panel-body">
 
-            <form id="addForm" action=" " role="form" ng-submit="add_item(newRecord)">
-                <div class="row">
-                    <div class="col-md-4">
+        <form id="addForm" action=" " role="form" ng-submit="add_item(newRecord)">
+            <div class="row">
+                <div class="col-md-4">
 
-                        <label for="caller">Caller phone number</label>
-                        <input id="caller" type="text" ng-model="newRecord.caller" class="form-control"
-                               ng-required="true">
-                        <span class="help-block">.</span>
-                    </div>
+                    <label for="caller">Caller phone number</label>
+                    <input id="caller" type="text" ng-model="newRecord.caller" class="form-control"
+                           ng-required="true">
+                    <span class="help-block">.</span>
+                </div>
 
-                    <div class="col-md-2">
-                        <label for="time">Time of call</label>
-                        <timepicker id="time" ng-model="newRecord.time" ng-change="changed()"
-                                    show-spinners=false
-                                    show-meridian="true"
-                                    arrowkeys=true
-                                    ng-required="true">
+                <div class="col-md-2">
+                    <label for="time">Time of call</label>
+                    <timepicker id="time" x-ng-model="newRecord.time" x-ng-change="changed()"
+                                show-spinners=false
+                                show-meridian="true"
+                                arrowkeys=true
+                                ng-required="true">
 
-                        </timepicker>
-                        <span class="help-block">.</span>
-                    </div>
+                    </timepicker>
+                    <span class="help-block">.</span>
+                </div>
 
 
-                    <div class="col-md-3">
-                        <label for="day">Day of call</label>
+                <div class="col-md-3">
+                    <label for="day">Day of call</label>
 
-                        <div class="input-group"><input id="day" type="text" class="form-control"
-                                                        datepicker-popup="{{format}}"
-                                                        ng-model="newRecord.date" is-open="opened"
-                                                        datepicker-options="dateOptions"
-                                                        ng-required="true" close-text="Close"/>
+                    <div class="input-group"><input id="day" type="text" class="form-control"
+                                                    datepicker-popup="{{format}}"
+                                                    ng-model="newRecord.date" is-open="opened"
+                                                    datepicker-options="dateOptions"
+                                                    ng-required="true" close-text="Close"/>
                             <span class="input-group-btn"><button type="button" class="btn btn-default"
                                                                   ng-click="open($event)"><i
                                     class="glyphicon glyphicon-calendar"></i></button></span>
-                        </div>
-                        <span class="help-block"></span>
-                    </div>
 
-
-                    <div class="col-md-3"><label for="case">Case number</label>
-                        <input id="case" type="text" ng-model="newRecord.case"
-                               class="form-control" ng-required="true"></div>
+                </div>
                     <span class="help-block"></span>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
+
+
+                <div class="col-md-3"><label for="case">Case number</label>
+                    <input id="case" type="text" ng-model="newRecord.case"
+                           class="form-control" ng-required="true"></div>
+                <span class="help-block"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                         <textarea class="form-control" ng-model="newRecord.comment" name="comments" id="comments"
                                   cols="20" rows="5"></textarea>
-                        <span class="help-block"></span>
-                    </div>
+                    <span class="help-block"></span>
+                </div>
 
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-default">Add</button>
-                    </div>
-                </div>
-            </form>
         </div>
-        <table class="table table-hover">
-
-            <tr>
-                <th>Caller</th>
-                <th>Date of call</th>
-                <th>Time of call</th>
-                <th>Case number</th>
-                <th>
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="" aria-haspopup="true" aria-expanded="false">
-                            Dropdown <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="">Show completed</a></li>
-                            <li><a href="">option 2</a></li>
-                            <li><a href="">Option 3</a></li>
-                        </ul>
-                    </div>
-
-                </th>
-                <td></td>
-            </tr>
-
-
-            <tr class="animate ng-class:{'success':record.complete}"
-                ng-repeat="record in items | orderBy:['date','time']" role="presentation">
-                <td>{{record.caller}}</td>
-                <td>{{record.date | date:'shortDate'}}</td>
-                <td>{{record.time | date:'shortTime'}}</td>
-                <td>{{record.case}}</td>
-                <td>
-                    <button ng-hide = "record.complete" type="button" class="btn btn-success" ng-click="complete_item(record)">Complete</button>
-                    <button ng-show = "record.complete" type="button" class="btn btn-danger" ng-click="complete_item(record)">Complete</button>
-
-                </td>
-            </tr>
-
-
-        </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-default">Add</button>
+                </div>
+            </div>
+        </form>
     </div>
+    <table class="table table-hover">
+
+        <tr>
+            <th>Caller</th>
+            <th>Date of call</th>
+            <th>Time of call</th>
+            <th><label for="searchCase">Case number</label>
+                <input id="searchCase" type="text" ng-model="search.case" class="form-control input-sm"
+                       ng-required="true"/>
+            </th>
+            <th>
+                Status
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="hideDone"> Hide if done.
+                    </label>
+                </div>
 
 
+            </th>
+
+        </tr>
+        <!-- TODO: Make directive for the list items -->
+
+        <tr call-list-item ng-repeat="call in items | orderBy:['date','time'] |filter:myFilter|filter:search">
+            <!-- Directive template is in /Partials/callListItem.html
+                directive declaration is in /public/javascripts/page2.js-->
+        </tr>
+
+
+    </table>
 </div>
 </div>

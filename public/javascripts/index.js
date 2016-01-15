@@ -4,6 +4,7 @@ angular.module('myNgSite', ['ngRoute',
     'myNgSite.page2',
     'myNgSite.main',
     'myNgSite.login',
+    'myNgSite.arduino',
     'myNgSite.users'])
 
     .config(['$routeProvider', function ($routeProvider, $locationProvider) {

@@ -48,14 +48,19 @@ angular.module('myNgSite.page2', ['ngRoute'])
             console.log('Time changed to: ' + $scope.item.time);
         };
 
-        $scope.clear = function () {
-            $scope.item.time = null;
-        };
 
         $scope.rowClass = function (row){
             if (row.comlete) return "success";
 
         };
+
+        $scope.myFilter = function (element) {
+            if ($scope.hideDone & element.complete) return false;
+
+
+            return true;
+
+        }
 
 
         $scope.updateList = function () {
@@ -97,6 +102,15 @@ angular.module('myNgSite.page2', ['ngRoute'])
         $scope.updateList();
 
     }])
+    .directive('callListItem', function () {
+        'use strict';
+        return {
+            restrict: "AE",
+            replace: true,
+
+            templateUrl: '/partials/callListItem.html'
+        };
+    })
 
     .config(['$routeProvider', function ($routeProvider, $locationProvider) {
         $routeProvider

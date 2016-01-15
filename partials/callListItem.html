@@ -1,0 +1,13 @@
+<tr class="animate-repeat ng-class:{'success':call.complete}" role="presentation">
+    <td>{{call.caller}}</td>
+    <td>{{call.date | date:'shortDate'}}</td>
+    <td>{{time | date:'shortTime'}}</td>
+    <td><span class="glyphicon glyphicon-filter"/>{{call.case}}</td>
+    <td>
+        <button ng-hide="call.complete" type="button" class="btn btn-success" ng-click="complete_item(call)">Complete
+        </button>
+        <button ng-show="call.complete" type="button" class="btn btn-danger" ng-click="complete_item(call)">Delete
+        </button>
+    </td>
+
+</tr>
